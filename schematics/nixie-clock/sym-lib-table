@@ -1,0 +1,8 @@
+(sym_lib_table
+  (lib (name "SN74HC595N")(type "KiCad")(uri "${KIPRJMOD}/libs/SN74HC595N/SN74HC595N.kicad_sym")(options "")(descr ""))
+  (lib (name "CustomComponents")(type "Legacy")(uri "${KIPRJMOD}/libs/KiCadLibs/CustomComponents.lib")(options "")(descr ""))
+  (lib (name "nixies-us")(type "Legacy")(uri "${KIPRJMOD}/libs/Eagle-and-KiCAD-Nixie-Libs/nixies-us.lib")(options "")(descr ""))
+  (lib (name "nixiemisc")(type "Legacy")(uri "${KIPRJMOD}/libs/Eagle-and-KiCAD-Nixie-Libs/nixiemisc.lib")(options "")(descr ""))
+  (lib (name "mynixies")(type "Legacy")(uri "${KIPRJMOD}/libs/Eagle-and-KiCAD-Nixie-Libs/mynixies.lib")(options "")(descr ""))
+  (lib (name "ATMEGA328-PU")(type "KiCad")(uri "${KIPRJMOD}/libs/ATMEGA328-PU/ATMEGA328-PU.kicad_sym")(options "")(descr ""))
+)

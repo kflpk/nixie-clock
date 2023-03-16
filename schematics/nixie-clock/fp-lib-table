@@ -1,0 +1,5 @@
+(fp_lib_table
+  (lib (name "SN74HC595N")(type "KiCad")(uri "${KIPRJMOD}/libs/SN74HC595N")(options "")(descr ""))
+  (lib (name "ATMEGA328-PU")(type "KiCad")(uri "${KIPRJMOD}/libs/ATMEGA328-PU")(options "")(descr ""))
+  (lib (name "footprints")(type "KiCad")(uri "${KIPRJMOD}/libs/KiCadLibs/footprints.pretty")(options "")(descr ""))
+)
