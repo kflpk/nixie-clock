@@ -1,0 +1,6 @@
+[submodule "schematics/nixie-clock/libs/KiCadLibs"]
+	path = schematics/nixie-clock/libs/KiCadLibs
+	url = https://github.com/StarGate01/KiCadLibs
+[submodule "schematics/nixie-clock/libs/Eagle-and-KiCAD-Nixie-Libs"]
+	path = schematics/nixie-clock/libs/Eagle-and-KiCAD-Nixie-Libs
+	url = https://github.com/judge2005/Eagle-and-KiCAD-Nixie-Libs.git
