@@ -2,4 +2,6 @@
   (lib (name "SN74HC595N")(type "KiCad")(uri "${KIPRJMOD}/libs/SN74HC595N")(options "")(descr ""))
   (lib (name "ATMEGA328-PU")(type "KiCad")(uri "${KIPRJMOD}/libs/ATMEGA328-PU")(options "")(descr ""))
   (lib (name "footprints")(type "KiCad")(uri "${KIPRJMOD}/libs/KiCadLibs/footprints.pretty")(options "")(descr ""))
+  (lib (name "IN1")(type "KiCad")(uri "${KIPRJMOD}/libs/IN1.pretty")(options "")(descr ""))
+  (lib (name "Eagle-and-KiCAD-Nixie-Libs")(type "KiCad")(uri "${KIPRJMOD}/libs/Eagle-and-KiCAD-Nixie-Libs")(options "")(descr ""))
 )
