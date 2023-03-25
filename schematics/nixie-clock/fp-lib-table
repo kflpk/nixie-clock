@@ -4,4 +4,7 @@
   (lib (name "footprints")(type "KiCad")(uri "${KIPRJMOD}/libs/KiCadLibs/footprints.pretty")(options "")(descr ""))
   (lib (name "IN1")(type "KiCad")(uri "${KIPRJMOD}/libs/IN1.pretty")(options "")(descr ""))
   (lib (name "Eagle-and-KiCAD-Nixie-Libs")(type "KiCad")(uri "${KIPRJMOD}/libs/Eagle-and-KiCAD-Nixie-Libs")(options "")(descr ""))
+  (lib (name "mynixies")(type "Legacy")(uri "${KIPRJMOD}/libs/Eagle-and-KiCAD-Nixie-Libs/mynixies.mod")(options "")(descr ""))
+  (lib (name "nixiemisc")(type "Legacy")(uri "${KIPRJMOD}/libs/Eagle-and-KiCAD-Nixie-Libs/nixiemisc.mod")(options "")(descr ""))
+  (lib (name "nixies-us")(type "Legacy")(uri "${KIPRJMOD}/libs/Eagle-and-KiCAD-Nixie-Libs/nixies-us.mod")(options "")(descr ""))
 )
