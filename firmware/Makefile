@@ -4,7 +4,6 @@ PROGRAMMER=arduino
 SRC=./src
 
 main.hex: obj/main.o obj/two_wire.o obj/nixie.o
-	avr-gcc -Os -DF_CPU=$(FCPU) -mmcu=$(MMCU) -c -o obj/main.o $(SRC)/main.c
 	avr-gcc -DF_CPU=$(FCPU) -mmcu=$(MMCU) -o main.bin $(wildcard obj/*.o) 
 	avr-objcopy -O ihex -R .eeprom main.bin main.hex
 
@@ -19,4 +18,4 @@ clean:
 	rm -f *.bin
 	rm -f *.hex
 	rm -f *.elf
-	rm -f *.o
+	rm -rf obj
