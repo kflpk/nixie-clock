@@ -16,16 +16,7 @@ struct DS_time {
     int year;
 };
 
-struct DS_time create_time_struct(int day, int month, int year, int hour, int minute, int second) {
-    return DS_time {
-        .day = day,
-        .month = month,
-        .year = year,
-        .hour = hour,
-        .minute = minute,
-        .second = second
-    };
-}
+struct DS_time create_time_struct(int day, int month, int year, int hour, int minute, int second);
 bool DS_set_time(struct DS_time* time);
 bool DS_get_time(struct DS_time* time);
 

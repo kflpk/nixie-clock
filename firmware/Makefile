@@ -1,14 +1,14 @@
 FCPU=16000000UL
 MMCU=atmega328p
 PROGRAMMER=arduino
-SRC=src
+SRC=./src
 
-main.hex: src/main.c obj/main.o obj/ds1307.o
-	avr-g++ -Os -DF_CPU=16000000UL -mmcu=atmega328p -c -o obj/main.o main.c
-	avr-g++ -o main.bin obj/*.o
+main.hex: obj/main.o obj/two_wire.o obj/nixie.o
+	avr-gcc -Os -DF_CPU=$(FCPU) -mmcu=$(MMCU) -c -o obj/main.o $(SRC)/main.c
+	avr-gcc -DF_CPU=$(FCPU) -mmcu=$(MMCU) -o main.bin $(wildcard obj/*.o) 
 	avr-objcopy -O ihex -R .eeprom main.bin main.hex
 
-obj/%.o: $(SRC)/%.cpp $(SRC)/config.h
+obj/%.o: $(SRC)/%.c
 	mkdir -p obj
 	avr-gcc -Os -DF_CPU=$(FCPU) -mmcu=$(MMCU) -c -o $@ $<
 
