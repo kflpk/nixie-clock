@@ -79,3 +79,19 @@ uint8_t TWI_read_byte(bool ACK) {
 
     return recv_data;
 }
+
+void TWI_read_buffer(uint8_t* buffer, int length) {
+    for(int i = 0; i < length; i++) {
+        bool ACK = true;
+        if(i == length - 1)
+            ACK = false;
+
+        buffer[i] = TWI_read_byte(ACK);
+    }
+}
+
+void TWI_write_buffer(uint8_t* buffer, int length) {
+    for(int i = 0; i < length; i++) {
+        TWI_write_byte(buffer[i]);
+    }
+}

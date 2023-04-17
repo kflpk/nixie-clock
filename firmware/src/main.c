@@ -1,6 +1,7 @@
 // #define __AVR_ATmega328P__
 
 #include <stdbool.h>
+
 #include <avr/io.h>
 #include <util/delay.h>
 
@@ -9,22 +10,27 @@
 #include "nixie.h"
 
 int main() {
+    uint8_t buf[64] = {
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+    };
+
     DDRB = (1 << PB5);
     display_init();
 
-    while(1) {
-        PORTB |= (1 << PB5);
-        _delay_ms(1000);
-        PORTB &= ~(1 << PB5);
-        _delay_ms(1000);
+    PORTB |= (1 << PB5);
+    _delay_ms(1000);
+    PORTB &= ~(1 << PB5);
+    _delay_ms(1000);
 
-        TWI_start();
-        TWI_addr_slave(DS_ADDR, TW_READ);
-        TWI_stop();
-        _delay_ms(1000);
-
-        display_numbers(2, 1, 3, 7);
-        refresh_display();
+    while(true) {
+        DS_get_time(0);
+        _delay_ms(10000);
     }
+
+    display_numbers(2, 1, 3, 7);
+    refresh_display();
+
+    while(true)
+        ;
     return 0;
 }

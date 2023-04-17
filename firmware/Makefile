@@ -3,7 +3,7 @@ MMCU=atmega328p
 PROGRAMMER=arduino
 SRC=./src
 
-main.hex: obj/main.o obj/two_wire.o obj/nixie.o
+main.hex: obj/main.o obj/two_wire.o obj/nixie.o obj/ds1307.o
 	avr-gcc -DF_CPU=$(FCPU) -mmcu=$(MMCU) -o main.bin $(wildcard obj/*.o) 
 	avr-objcopy -O ihex -R .eeprom main.bin main.hex
 
