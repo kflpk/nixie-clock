@@ -15,7 +15,8 @@
 #define RCLK_PIN   PC2
 
 void display_init();
-void display_numbers(uint8_t num1, uint8_t num2, uint8_t num3, uint8_t num4);
+void display_numbers(uint8_t num1, uint8_t num2, 
+                     uint8_t num3, uint8_t num4);
 void push_number(uint8_t number);
 void refresh_display(void);
 
