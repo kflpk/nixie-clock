@@ -25,8 +25,6 @@ void parse_time_buffer(struct DS_time* time) {
 }
 
 bool DS_get_time(struct DS_time* time) {
-    parse_time_buffer(time);
-
     TWI_start();
 
     TWI_addr_slave(DS_ADDR, TW_WRITE);
