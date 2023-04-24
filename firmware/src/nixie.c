@@ -4,6 +4,9 @@
 
 void display_init() {
     DDRC = 0b111;
+    for(int i = 0; i < 4; i++) {
+        push_number(0);
+    }
 }
 
 void display_numbers(uint8_t num1, uint8_t num2, uint8_t num3, uint8_t num4) {
