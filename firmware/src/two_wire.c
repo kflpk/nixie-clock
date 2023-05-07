@@ -1,30 +1,41 @@
 #include "two_wire.h"
 
 void TWI_master_init(void) {
-    TWSR |= (0 << TWPS0) | (0 << TWPS1); // set the TWI prescaler to 64
+    TWSR |= (1 << TWPS0) | (1 << TWPS1); // set the TWI prescaler to 64
     TWBR = 0x01;
 }
 
 void TWI_start(void) {
+    int retries = 10;
     // Send the start condition
     TWCR = (1 << TWINT)  // Clear the TWINT flag
          | (1 << TWSTA)  // set start condition bit
          | (1 << TWEN);  //enable the TWI
     while( !(TWCR & (1 << TWINT)) ) // wait until the start condition is transmitted
         ;
-    while((TWSR & 0xF8) != 0x08) 
-        ;
+    while(TW_STATUS != TW_START) {
+            retries--;
+            if(retries == 0)
+                break;
+            _delay_us(50);
+    }
 }
 
 void TWI_repeated_start(void) {
+    int retries = 10;
     // Send the start condition
     TWCR = (1 << TWINT)  // Clear the TWINT flag
          | (1 << TWSTA)  // set start condition bit
          | (1 << TWEN);  //enable the TWI
     while( !(TWCR & (1 << TWINT)) ) // wait until the start condition is transmitted
         ;
-    while((TWSR & 0xF8) != 0x10) // check for ACK
-        ;
+
+    while(TW_STATUS != TW_REP_START) {// check for ACK
+            retries--;
+            if(retries == 0)
+                break;
+            _delay_us(50);
+    }
 }
 
 void TWI_stop(void) {
@@ -35,16 +46,25 @@ void TWI_stop(void) {
 
 
 void TWI_addr_slave(uint8_t addr, bool write) {
+    int retries = 100;
     TWDR = (addr << 1) + write; // load address and write bit to TW data register
     TWCR &= ~(1 << TWSTA);
     TWCR = (1 << TWINT) | (1 << TWEN); // send the loaded data to the bus
 
     if(write == TW_WRITE) { // for Master Transmitter mode
-        while((TWSR & 0xF8) != 0x18) // SLA+W transmitted, ACK received
-            ;  
+        while(TW_STATUS != 0x18) { // SLA+W transmitted, ACK received
+            retries--;
+            if(retries == 0)
+                break;
+            _delay_us(50);
+        }
     } else { // for Master Receiver mode
-        while((TWSR & 0xF8) != 0x40) // SLA+R transmitted, ACK received
-            ;  
+        while(TW_STATUS != 0x40) { // SLA+R transmitted, ACK received
+            retries--;
+            if(retries == 0)
+                break;
+            _delay_us(50);
+        }
     }
 }
 
@@ -54,12 +74,12 @@ void TWI_write_byte(uint8_t data) {
     TWCR = (1 << TWINT) | (1 << TWEN); // send the loaded data to the bus
     while( !(TWCR & (1 << TWINT)) )
         ;
-    while((TWSR & 0xF8) != 0x28) // Data transmitted, ACK received
+    while(TW_STATUS != TW_MT_DATA_ACK) // Data transmitted, ACK received
         ;
 }
 
 uint8_t TWI_read_byte(bool ACK) {
-    int i = 0;
+    int retries = 10;
     uint8_t recv_data;
 
 	TWCR = (1 << TWINT) | (1 << TWEN) | (ACK << TWEA);    // Clear TWI interrupt flag,Enable TWI
@@ -68,14 +88,22 @@ uint8_t TWI_read_byte(bool ACK) {
     }
 
     if(ACK) {
-        while((TWSR & 0xF8) != 0x50) { // Data received, ACK returned
+        while(TW_STATUS != TW_MR_DATA_ACK) { // Data received, ACK returned
+            retries--;
+            if(retries == 0)
+                break;
+            _delay_us(50);
         }
     } else {
-        while((TWSR & 0xF8) != 0x58) { // Data received, NACK returned
+        while(TW_STATUS != TW_MR_DATA_NACK) { // Data received, NACK returned
+            retries--;
+            if(retries == 0)
+                break;
+            _delay_us(50);
         }
     }
 
-	recv_data=TWDR;
+	recv_data = TWDR;
 
     return recv_data;
 }
