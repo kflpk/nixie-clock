@@ -1,4 +1,5 @@
 #include "two_wire.h"
+#include "uart_hal.h"
 
 void TWI_master_init(void) {
     TWSR |= (1 << TWPS0) | (1 << TWPS1); // set the TWI prescaler to 64
@@ -12,11 +13,14 @@ void TWI_start(void) {
          | (1 << TWSTA)  // set start condition bit
          | (1 << TWEN);  //enable the TWI
     while( !(TWCR & (1 << TWINT)) ) // wait until the start condition is transmitted
-        ;
+        uart_send_string("waiting for the start condition\n");
     while(TW_STATUS != TW_START) {
+            uart_send_string("TW_START not transmitted, retrying\n");
             retries--;
-            if(retries == 0)
+            if(retries == 0) {
+                uart_send_string("TW_START retried, breaking\n");
                 break;
+            }
             _delay_us(50);
     }
 }
